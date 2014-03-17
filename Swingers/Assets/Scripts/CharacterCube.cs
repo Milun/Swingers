@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterCube : Character {
+public class CharacterCube : CharacterMovement {
 
 	// Use this for initialization
 	void Start () {
