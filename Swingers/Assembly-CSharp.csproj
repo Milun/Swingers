@@ -48,7 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CharacterCube.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\Input_Controller.cs" />
      <Compile Include="Assets\Scripts\Input_Keyboard.cs" />
+ <Reference Include="XInputDotNetPure">
+ <HintPath>Assets\XInputDotNetPure.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

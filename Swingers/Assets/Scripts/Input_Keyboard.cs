@@ -2,7 +2,7 @@
 using System.Collections;
 
 // Prints an error if there is no CharacterController for this object.
-//[RequireComponent( typeof(CharacterMovement))]
+[RequireComponent( typeof(CharacterMovement))]
 
 public class Input_Keyboard : MonoBehaviour
 {
@@ -26,11 +26,11 @@ public class Input_Keyboard : MonoBehaviour
 
 		if(Input.GetKey (moveLeft))
 		{
-			charMovement.SetXSpeed(-2.0f);
+			charMovement.SetXSpeed(-1.0f);
 		}
 		else if(Input.GetKey (moveRight))
 		{
-			charMovement.SetXSpeed(2.0f);
+			charMovement.SetXSpeed(1.0f);
 		}
 
 		if(Input.GetKey (jump))

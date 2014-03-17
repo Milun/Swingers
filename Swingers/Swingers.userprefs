@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Input_Controller.cs">
     <Files>
-      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="38" Column="29" />
-      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="29" Column="8" />
+      <File FileName="Assets\Scripts\Input_Controller.cs" Line="25" Column="3" />
+      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="17" Column="30" />
+      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="19" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

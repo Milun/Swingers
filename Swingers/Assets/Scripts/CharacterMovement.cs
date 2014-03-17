@@ -14,7 +14,7 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour
 {
 
-	public float 	moveSpeed = 1.0f;			// Maximum speed the character reaches while running.
+	public float 	moveSpeed = 7.0f;			// Maximum speed the character reaches while running.
 	public float	m_gravity = 0.4f;			// Gets added every frame to y-speed when falling.
 	public float	m_gravityMax = 10.0f;		// A character will not exceed this speed when in free fall.
 
@@ -24,10 +24,11 @@ public class CharacterMovement : MonoBehaviour
 	private float 	m_direction = 1;			// Can equal 1 or -1. 1 = Facing right.
 	private Vector3 m_colNormal = new Vector3(-0.01f, 0.0f, 0.0f);
 
-	public float 	m_maxSpeed = 10.0f;
+	public float 	m_maxSpeed = 1.0f;
 
-	public float m_xSpeed, m_ySpeed = 0.0f;
-	private float friction = 0.9f;
+	public float 	m_xSpeed, m_ySpeed = 0.0f;	//Two speeds represented on a scale of -1 to 1
+	private float 	friction = 0.9f;
+	private bool	m_canJump = false;
 	
 	CharacterController controller;
 
@@ -101,7 +102,7 @@ public class CharacterMovement : MonoBehaviour
 	{
 		Gravity ();
 	
-		Vector3 movementDir = new Vector3(m_xSpeed, m_ySpeed + (m_anchor), 0.0f);
+		Vector3 movementDir = new Vector3(m_xSpeed * moveSpeed, m_ySpeed + (m_anchor), 0.0f);
 		controller.Move (movementDir * Time.deltaTime);
 
 		Anchor();
@@ -109,12 +110,25 @@ public class CharacterMovement : MonoBehaviour
 
 	public void SetXSpeed(float newX)
 	{
+		if(newX > 1)
+		{
+			newX = 1;
+		}
+		else if(newX < -1)
+		{
+			newX = -1;
+		}
+
 		m_xSpeed = newX;
 	}
 
 	public void SetYSpeed(float newY)
 	{
-		m_ySpeed = newY;
+		if(m_canJump)
+		{
+			m_ySpeed = newY;
+			m_canJump = false;
+		}
 	}
 
 	public float getXSpeed()
@@ -140,7 +154,10 @@ public class CharacterMovement : MonoBehaviour
 
 		// Temporary: Show when the character is on the ground.
 		if (controller.isGrounded)
+		{
+			m_canJump = true;
 			renderer.material.color = new Color(0.5f,0.0f,0.5f);
+		}
 		else
 		{
 			//UnityEditor.EditorApplication.isPaused = true;
