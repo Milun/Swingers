@@ -2,7 +2,7 @@
 using System.Collections;
 
 // Prints an error if there is no CharacterController for this object.
-[RequireComponent( typeof(CharacterMovement))]
+[RequireComponent( typeof(Character))]
 
 public class Input_Keyboard : MonoBehaviour
 {
@@ -11,12 +11,14 @@ public class Input_Keyboard : MonoBehaviour
 	KeyCode moveRight = KeyCode.RightArrow;
 	KeyCode jump = KeyCode.Z;
 
-	CharacterMovement charMovement;
+	bool pressJump = false;
+
+	Character character;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
-		charMovement = GetComponent<CharacterMovement>();
+		character = GetComponent<Character>();
 	}
 	
 	// Update is called once per frame
@@ -26,16 +28,22 @@ public class Input_Keyboard : MonoBehaviour
 
 		if(Input.GetKey (moveLeft))
 		{
-			charMovement.SetXSpeed(-1.0f);
+			character.PressHorizontal (-1.0f);
 		}
 		else if(Input.GetKey (moveRight))
 		{
-			charMovement.SetXSpeed(1.0f);
+			character.PressHorizontal (1.0f);
 		}
 
-		if(Input.GetKey (jump))
+		// Only triggers once when you press the button.
+		if(Input.GetKey (jump) && !pressJump)
 		{
-			charMovement.SetYSpeed(10.0f);
+			character.PressUp ();
+			pressJump = true;
+		}
+		else if (!Input.GetKey (jump))
+		{
+			pressJump = false;
 		}
 		
 	}

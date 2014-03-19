@@ -2,7 +2,7 @@
 using System.Collections;
 using XInputDotNetPure;
 
-[RequireComponent( typeof(CharacterMovement))]
+[RequireComponent( typeof(Character))]
 
 public class Input_Controller : MonoBehaviour
 {
@@ -10,14 +10,14 @@ public class Input_Controller : MonoBehaviour
 	private GamePadState state;
 	private GamePadState prevState;
 
-	CharacterMovement charMovement;
+	Character character;
 
 	// Use this for initialization
-	void Start()
+	void Awake()
 	{
 		playerIndex = (PlayerIndex)0;
 
-		charMovement = GetComponent<CharacterMovement>();
+		character = GetComponent<Character>();
 	}
 	
 	// Update is called once per frame
@@ -27,13 +27,13 @@ public class Input_Controller : MonoBehaviour
 
 		if(state.IsConnected)
 		{
-			charMovement.SetXSpeed (state.ThumbSticks.Left.X);
+			character.PressHorizontal(state.ThumbSticks.Left.X);
 
 			print (state.ThumbSticks.Left.X);
 
 			if(state.Buttons.A == ButtonState.Pressed)
 			{
-				charMovement.SetYSpeed (10.0f);
+				character.PressUp();
 			}
 
 			prevState = state;
