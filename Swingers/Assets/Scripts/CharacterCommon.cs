@@ -40,7 +40,12 @@ public class CharacterCommon : MonoBehaviour {
 	// Makes the character jump and also handles multiple jumps.
 	public void Jump()
 	{
-		if(m_jumpCount < m_jumpMax)
+		if (!charPhysics.IsGrounded() && charPhysics.isColliding)
+		{
+			charPhysics.SetYSpeed(m_jumpHeight);
+		}
+
+		else if(m_jumpCount < m_jumpMax)
 		{
 			charPhysics.SetYSpeed(m_jumpHeight);
 

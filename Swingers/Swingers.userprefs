@@ -1,13 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterAnimation.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterPhysics.cs">
     <Files>
       <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="1" Column="19" />
-      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="67" Column="20" />
-      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="44" Column="4" />
-      <File FileName="Assets\Scripts\Character.cs" Line="22" Column="25" />
-      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="35" Column="34" />
-      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="1" Column="19" />
+      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="161" Column="40" />
+      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="88" Column="1" />
+      <File FileName="Assets\Scripts\Character.cs" Line="36" Column="2" />
+      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="8" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

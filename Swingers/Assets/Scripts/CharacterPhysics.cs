@@ -153,4 +153,12 @@ public class CharacterPhysics : MonoBehaviour
 		Move ();
 
 	}
+
+	public bool isColliding
+	{
+		get
+		{
+			return (controller.collisionFlags == CollisionFlags.Sides);
+		}
+	}
 }
