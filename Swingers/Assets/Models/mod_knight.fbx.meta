@@ -577,9 +577,9 @@ ModelImporter:
     - serializedVersion: 16
       name: anim_jump
       takeName: anim_jump
-      firstFrame: -1
-      lastFrame: 160
-      wrapMode: 0
+      firstFrame: 0
+      lastFrame: 11
+      wrapMode: 4
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0

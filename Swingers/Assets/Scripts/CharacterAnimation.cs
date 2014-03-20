@@ -15,6 +15,14 @@ public class CharacterAnimation : MonoBehaviour {
 	}
 
 	/**
+	 * Returns a value from 0 - 1 which is the percentage of where the current animation is in being played.
+	 **/
+	private float GetAnimPercent(string animName)
+	{
+		return animation[animName].time/animation[animName].length;
+	}
+
+	/**
 	 * Handles walking AND running
 	 **/
 	void AnimWalk() {
@@ -29,13 +37,11 @@ public class CharacterAnimation : MonoBehaviour {
 		// Whoops.
 		if (!animation.IsPlaying("anim_walk") && animation.IsPlaying("anim_run"))
 		{
-			float animRunPercent = animation["anim_run"].time/animation["anim_run"].length;
-			animation["anim_walk"].time = animRunPercent*animation["anim_walk"].length;
+			animation["anim_walk"].time = GetAnimPercent("anim_run")*animation["anim_walk"].length;
 		}
 		else if (!animation.IsPlaying("anim_run") && animation.IsPlaying("anim_walk"))
 		{
-			float animWalkPercent = animation["anim_walk"].time/animation["anim_walk"].length;
-			animation["anim_run"].time = animWalkPercent*animation["anim_run"].length;
+			animation["anim_run"].time = GetAnimPercent("anim_walk")*animation["anim_run"].length;
 		}
 
 		// Check if the speed is low enough for the character to walk.
@@ -44,14 +50,14 @@ public class CharacterAnimation : MonoBehaviour {
 			animation["anim_walk"].speed = speed*4;
 
 			// Smoothly transitions towards this animation (takes half a second).
-			animation.CrossFade("anim_walk", 0.4f);
+			animation.CrossFade("anim_walk", 0.6f);
 		}
 		else
 		{
 			animation["anim_run"].speed = speed;
 
 			// Smoothly transitions towards this animation (takes half a second).
-			animation.CrossFade("anim_run", 0.4f);
+			animation.CrossFade("anim_run", 0.6f);
 		}
 
 		if (charCommon.GetDirection() == -1)
@@ -66,6 +72,14 @@ public class CharacterAnimation : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		AnimWalk();
+
+		if (charPhysics.IsGrounded())
+		{
+			AnimWalk();
+		}
+		else
+		{
+			animation.CrossFade("anim_jump", 0.1f);
+		}
 	}
 }

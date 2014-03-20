@@ -20,7 +20,7 @@ public class CharacterPhysics : MonoBehaviour
 
 	private bool	m_isAnchored = false;		// Becomes true for the first frame when controller.isGrounded == true. 
 	private float	m_anchor = 0.0f;			// Applies downward force to keep the character on the platform it's standing on.
-	private float	m_anchorSize = 2.0f;		// The larger the anchor, the steeper the slopes your character will stick to.
+	private float	m_anchorSize = 5.0f;		// The larger the anchor, the steeper the slopes your character will stick to.
 	
 	public float 	m_maxSpeed = 1.0f;
 
@@ -63,6 +63,8 @@ public class CharacterPhysics : MonoBehaviour
 	{
 		if(m_ySpeed > 0.0f)
 		{
+			m_isAnchored = false;
+			m_anchor = 0.0f;
 			return;
 		}
 
