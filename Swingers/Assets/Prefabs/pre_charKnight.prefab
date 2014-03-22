@@ -1002,6 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd059f5db6dcbf48bf140188936f080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testGrapplePoint: {fileID: 100000, guid: e8c23c18fe6fce24ba0e0d8f4803c17b, type: 2}
   m_jumpCount: 0
   m_jumpMax: 2
 --- !u!114 &11400008

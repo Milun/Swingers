@@ -45,6 +45,12 @@ public class Input_Keyboard : MonoBehaviour
 		{
 			pressJump = false;
 		}
+
+		if(Input.GetKey (KeyCode.X))
+		{
+			character.Aim(new Vector3(1,1,0));
+			character.FireGrapple ();
+		}
 		
 	}
 }

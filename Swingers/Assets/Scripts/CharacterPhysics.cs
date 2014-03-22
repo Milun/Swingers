@@ -25,7 +25,7 @@ public class CharacterPhysics : MonoBehaviour
 	public float 	m_maxSpeed = 1.0f;
 
 	public float 	m_xSpeed, m_ySpeed = 0.0f;	//Two speeds represented on a scale of -1 to 1
-	private float 	friction = 0.99f;
+	private float 	friction = 0.90f;
 
 	CharacterController controller;
 
@@ -41,7 +41,7 @@ public class CharacterPhysics : MonoBehaviour
 	private void Gravity()
 	{
 		// If the character is not on the ground, increase its gravity.
-		if (!IsGrounded())
+		if (!isGrounded)
 		{
 			if (-m_ySpeed < m_gravityMax)
 			{
@@ -102,45 +102,6 @@ public class CharacterPhysics : MonoBehaviour
 		Anchor();
 	}
 
-	public void SetXSpeed(float newX)
-	{
-		if(newX > 1)
-		{
-			newX = 1;
-		}
-		else if(newX < -1)
-		{
-			newX = -1;
-		}
-
-		m_xSpeed = newX;
-	}
-
-	public void SetYSpeed(float newY)
-	{
-		m_ySpeed = newY;
-	}
-
-	public float GetXSpeed()
-	{
-		return m_xSpeed;
-	}
-
-	public float GetMaxSpeed()
-	{
-		return m_maxSpeed;
-	}
-
-	public float GetYSpeed()
-	{
-		return m_ySpeed;
-	}
-
-	public bool IsGrounded()
-	{
-		return controller.isGrounded;
-	}
-
 	// Update is called once per frame
 	void Update ()
 	{
@@ -154,7 +115,58 @@ public class CharacterPhysics : MonoBehaviour
 
 	}
 
-	public bool isColliding
+	public float maxSpeed
+	{
+		get
+		{
+			return m_maxSpeed;
+		}
+	}
+
+	public float xSpeed
+	{
+		get
+		{
+			return m_xSpeed;
+		}
+
+		set
+		{
+			if(value > 1)
+			{
+				value = 1;
+			}
+			else if(value < -1)
+			{
+				value = -1;
+			}
+			
+			m_xSpeed = value;
+		}
+	}
+
+	public float ySpeed
+	{
+		get
+		{
+			return m_ySpeed;
+		}
+
+		set
+		{
+			m_ySpeed = value;
+		}
+	}
+
+	public bool isGrounded
+	{
+		get
+		{
+			return controller.isGrounded;
+		}
+	}
+
+	public bool isOnWall
 	{
 		get
 		{

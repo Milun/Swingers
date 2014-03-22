@@ -26,6 +26,17 @@ public class Character : MonoBehaviour
 	{
 		charCommon.Walk (val);
 	}
+
+	public void Aim(Vector3 newAim)
+	{
+		charCommon.Aim(newAim);
+	}
+
+	
+	public void FireGrapple()
+	{
+		charCommon.FireGrapple();
+	}
 	
 	// Update is called once per frame
 	void Update ()

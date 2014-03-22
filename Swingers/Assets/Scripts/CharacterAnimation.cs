@@ -3,13 +3,14 @@ using System.Collections;
 
 [RequireComponent( typeof(CharacterCommon))]
 [RequireComponent( typeof(CharacterPhysics))]
-public class CharacterAnimation : MonoBehaviour {
-
+public class CharacterAnimation : MonoBehaviour
+{
 	CharacterCommon 	charCommon;
 	CharacterPhysics 	charPhysics;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake ()
+	{
 		charCommon 	= GetComponent<CharacterCommon>();
 		charPhysics = GetComponent<CharacterPhysics>();
 	}
@@ -25,10 +26,10 @@ public class CharacterAnimation : MonoBehaviour {
 	/**
 	 * Handles walking AND running
 	 **/
-	void AnimWalk() {
-
+	void AnimWalk()
+	{
 		// Speed from 0 - 1, where 1 is the maximum running speed.
-		float speed = Mathf.Abs(charPhysics.GetXSpeed()) / charPhysics.GetMaxSpeed();
+		float speed = Mathf.Abs(charPhysics.xSpeed) / charPhysics.maxSpeed;
 
 		// Synch the walking animation and running animation (as if they were playing simultaneously.
 		// This allows the two animations to be transitioned between smoothly.
@@ -60,7 +61,7 @@ public class CharacterAnimation : MonoBehaviour {
 			animation.CrossFade("anim_run", 0.6f);
 		}
 
-		if (charCommon.GetDirection() == -1)
+		if (charCommon.direction == -1)
 		{
 			transform.localEulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
 		}
@@ -71,9 +72,9 @@ public class CharacterAnimation : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
-
-		if (charPhysics.IsGrounded())
+	void Update ()
+	{
+		if (charPhysics.isGrounded)
 		{
 			AnimWalk();
 		}
