@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 
 	public void PressHorizontal(float val)
 	{
-		charCommon.Walk (val);
+		charCommon.Run (val);
 	}
 
 	public void Aim(Vector3 newAim)

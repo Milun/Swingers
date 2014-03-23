@@ -33,6 +33,8 @@ public class Input_Controller : MonoBehaviour
 
 		if(state.IsConnected)
 		{
+			print (state.ThumbSticks.Left.X);
+
 			character.PressHorizontal(state.ThumbSticks.Left.X);
 
 			Vector3 currentAim = new Vector3(state.ThumbSticks.Left.X,state.ThumbSticks.Left.Y,0);

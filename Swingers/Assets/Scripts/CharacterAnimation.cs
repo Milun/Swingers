@@ -29,7 +29,7 @@ public class CharacterAnimation : MonoBehaviour
 	void AnimWalk()
 	{
 		// Speed from 0 - 1, where 1 is the maximum running speed.
-		float speed = Mathf.Abs(charPhysics.xSpeed) / charPhysics.maxSpeed;
+		float speed = Mathf.Abs(charPhysics.xSpeed) / charCommon.runSpeed;
 
 		// Synch the walking animation and running animation (as if they were playing simultaneously.
 		// This allows the two animations to be transitioned between smoothly.
@@ -61,7 +61,7 @@ public class CharacterAnimation : MonoBehaviour
 			animation.CrossFade("anim_run", 0.6f);
 		}
 
-		if (charCommon.direction == -1)
+		if (charCommon.facing == -1)
 		{
 			transform.localEulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
 		}

@@ -1,23 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterCommon.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterPhysics.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="51" Column="5" />
-      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="108" Column="4" />
+      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="25" Column="3" />
+      <File FileName="Assets\Scripts\Character.cs" Line="27" Column="24" />
+      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="8" Column="30" />
+      <File FileName="Assets\Scripts\GrappleLogic.cs" Line="36" Column="15" />
       <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Input_Controller.cs" Line="47" Column="1" />
-      <File FileName="Assets\Scripts\GrappleLogic.cs" Line="34" Column="1" />
-=======
-      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="48" Column="1" />
-      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="32" Column="45" />
-      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="116" Column="3" />
-      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="48" Column="1" />
-      <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="1" Column="1" />
->>>>>>> a407f6c28d1df22f26ecc2f59b72335b15eec343
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

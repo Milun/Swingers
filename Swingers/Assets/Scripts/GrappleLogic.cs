@@ -23,13 +23,15 @@ public class GrappleLogic : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider other)
 	{
+		print ("we love to sing");
+
 		if(other.gameObject.tag == "Character")
 		{
 			//then we got a grapple on
 		}
-		else if(true)//this WILL check the object can be grappled on before doing this
+		else//this WILL check the object can be grappled on before doing this
 		{
 			m_grapplePointSet = true;
 		}
