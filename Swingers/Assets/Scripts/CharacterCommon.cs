@@ -92,26 +92,27 @@ public class CharacterCommon : MonoBehaviour
 	 */
 	public void Run(float speed)
 	{
-		// Accelerate in speed. Do not accelerate if you're going faster than runSpeed.
+		// Get the speed we're trying to reach.
+		float targetSpeed = speed*runSpeed;
+		float direction = 1.0f;
+		if (speed < 0.0f)
+		{
+			direction = -1.0f;
+		}
+
+		// Accelerate towards the target speed. Do not accelerate if you're going faster than it.
 		if (
-				(speed > 0.0f && charPhysics.xSpeed < runSpeed) ||
-				(speed < 0.0f && charPhysics.xSpeed > -runSpeed)
+				(direction > 0.0f && charPhysics.xSpeed < targetSpeed) ||
+				(direction < 0.0f && charPhysics.xSpeed > targetSpeed)
 		   )
 		{
-			charPhysics.xSpeed = charPhysics.xSpeed + speed*runAcc;
+			charPhysics.xSpeed = charPhysics.xSpeed + direction*runAcc;
 		}
 
 		// Change direction variable.
 		if (charPhysics.isGrounded)
 		{
-			if (speed < 0)
-			{
-				m_facing = -1;
-			}
-			else if (speed > 0)
-			{
-				m_facing = 1;
-			}
+			m_facing = (int)direction;
 		}
 	}
 

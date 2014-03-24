@@ -204,10 +204,12 @@ public class CharacterPhysics : MonoBehaviour
 		{	
 			// Do NOT move into walls while falling.
 			if (isGrounded ||
+			    controller.collisionFlags == CollisionFlags.None || 
 			   	(wallNormal.x >= 0.0f && value > 0.0f) ||
 				(wallNormal.x <= 0.0f && value < 0.0f)
 			   )
 			{
+
 				m_xSpeed = value;
 			}
 		}
