@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_gravityMax: 25
   m_isGrounded: 0
   m_wallNormal: {x: 0, y: 0, z: 0}
-  m_wallAnchor: 0
+  m_anchorWall: 0
   m_xSpeed: 0
   m_ySpeed: 0
 --- !u!114 &1688696589

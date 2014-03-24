@@ -20,12 +20,12 @@ public class CharacterPhysics : MonoBehaviour
 												// controller.isGrounded returns true regardless of surface. This overwrites this.
 
 	private bool	m_isAnchored = false;		// Becomes true for the first frame when controller.isGrounded == true. 
-	private float	m_anchor = 0.0f;			// Applies downward force to keep the character on the platform it's standing on.
 	private float	m_anchorSize = 5.0f;		// The larger the anchor, the steeper the slopes your character will stick to.
+	private float	m_anchorFloor = 0.0f;		// Applies downward force to keep the character on the platform it's standing on.
 
-	private float	m_slopeSlide = 0.5f;		// If a slopes normal is steeper than this, slide down it.
+	private float	m_wallSlope = 0.5f;			// If a slopes normal is steeper than this, slide down it.
 	public Vector3	m_wallNormal = Vector3.zero;// The vector of the normal of the collided wall/floor.
-	public float	m_wallAnchor = 0.0f;		// Moves the character towards vertical walls, in a similar fashion to anchor.
+	public float	m_anchorWall = 0.0f;		// Moves the character towards vertical walls, in a similar fashion to anchor.
 
 	public float 	m_xSpeed, m_ySpeed = 0.0f;
 	private float 	friction = 0.92f;
@@ -62,12 +62,12 @@ public class CharacterPhysics : MonoBehaviour
 	 * 
 	 * MUST be called after Move().
 	 */
-	private void Anchor()
+	private void AnchorFloor()
 	{
 		if(m_ySpeed > 0.0f)
 		{
 			m_isAnchored = false;
-			m_anchor = 0.0f;
+			m_anchorFloor = 0.0f;
 			isGrounded = false;
 			return;
 		}
@@ -77,7 +77,7 @@ public class CharacterPhysics : MonoBehaviour
 		{
 			m_isAnchored = true;
 
-			m_anchor = -m_anchorSize;
+			m_anchorFloor = -m_anchorSize;
 		}
 		// If not grounded, do not apply downward force.
 		else if (!isGrounded && m_isAnchored)
@@ -85,16 +85,16 @@ public class CharacterPhysics : MonoBehaviour
 			m_isAnchored = false;
 
 			// Fixes the jitter that occurs in the first frame that the character is not on the ground.
-			controller.Move ( (new Vector3(0.0f, -m_anchor*2.0f, 0.0f)) * Time.deltaTime );
+			controller.Move ( (new Vector3(0.0f, -m_anchorFloor*2.0f, 0.0f)) * Time.deltaTime );
 
-			m_anchor = 0.0f;
+			m_anchorFloor = 0.0f;
 		}
 	}
 
 	/**
 	 * Moves the character towards a wall (for walljumping).
 	 **/
-	private void WallAnchor()
+	private void AnchorWall()
 	{
 		// If the wall is perfectly vertical, make the character stick to it.
 		// Disable this effect if the character tries to move away from the wall.
@@ -106,11 +106,11 @@ public class CharacterPhysics : MonoBehaviour
 		     	)
 		    )
 		{
-			m_wallAnchor = -wallNormal.x;
+			m_anchorWall = -wallNormal.x;
 		}
 		else
 		{
-			m_wallAnchor = 0.0f;
+			m_anchorWall = 0.0f;
 		}
 	}
 
@@ -123,11 +123,11 @@ public class CharacterPhysics : MonoBehaviour
 	{
 		Gravity ();
 
-		Vector3 movementDir = new Vector3(m_xSpeed+m_wallAnchor, m_ySpeed + (m_anchor), 0.0f);
+		Vector3 movementDir = new Vector3(m_xSpeed+m_anchorWall, m_ySpeed + m_anchorFloor, 0.0f);
 		controller.Move (movementDir * Time.deltaTime);
 
-		Anchor();
-		WallAnchor();
+		AnchorFloor();
+		AnchorWall();
 	}
 
 	// Update is called once per frame
@@ -167,7 +167,7 @@ public class CharacterPhysics : MonoBehaviour
 		Vector3 normal = col.normal;
 
 		// If you're touching or "standing" on a slope that's too steep, slide down it.
-		if (Mathf.Abs(normal.x) > m_slopeSlide)
+		if (Mathf.Abs(normal.x) > m_wallSlope)
 		{
 			// Record the side the wall is on relative to you.
 			m_wallNormal = normal;
