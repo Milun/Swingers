@@ -37,6 +37,11 @@ public class Character : MonoBehaviour
 	{
 		charCommon.FireGrapple();
 	}
+
+	public void ReleaseGrapple()
+	{
+		charCommon.ReleaseGrapple();
+	}
 	
 	// Update is called once per frame
 	void Update ()

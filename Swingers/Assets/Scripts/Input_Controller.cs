@@ -10,18 +10,12 @@ public class Input_Controller : MonoBehaviour
 	private GamePadState state;
 	private GamePadState prevState;
 
-	private ButtonState jumpButton;
-	private ButtonState toggleGrapple;
-
 	Character character;
 
 	// Use this for initialization
 	void Awake()
 	{
 		playerIndex = (PlayerIndex)0;
-
-		jumpButton = state.Buttons.A;
-		toggleGrapple = state.Buttons.RightShoulder;
 
 		character = GetComponent<Character>();
 	}
@@ -33,8 +27,6 @@ public class Input_Controller : MonoBehaviour
 
 		if(state.IsConnected)
 		{
-			print (state.ThumbSticks.Left.X);
-
 			character.PressHorizontal(state.ThumbSticks.Left.X);
 
 			Vector3 currentAim = new Vector3(state.ThumbSticks.Left.X,state.ThumbSticks.Left.Y,0);
@@ -44,14 +36,19 @@ public class Input_Controller : MonoBehaviour
 			}
 			character.Aim(currentAim);
 
-			if(jumpButton == ButtonState.Pressed)
+			if(state.Buttons.A == ButtonState.Pressed)
 			{
 				character.PressUp();
 			}
 
-			if(toggleGrapple == ButtonState.Pressed)
+			if(state.Buttons.RightShoulder == ButtonState.Pressed)
 			{
 				character.FireGrapple();
+			}
+
+			if(state.Buttons.RightShoulder == ButtonState.Released)
+			{
+				character.ReleaseGrapple();
 			}
 
 			prevState = state;

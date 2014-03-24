@@ -5,6 +5,8 @@ public class GrappleLogic : MonoBehaviour
 {
 	private Vector3 m_direction;
 	private float m_speed;
+	private float m_ropeLength;
+	private GameObject m_player;
 
 	private bool m_grapplePointSet = false;
 
@@ -25,8 +27,6 @@ public class GrappleLogic : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		print ("we love to sing");
-
 		if(other.gameObject.tag == "Character")
 		{
 			//then we got a grapple on
@@ -34,6 +34,7 @@ public class GrappleLogic : MonoBehaviour
 		else//this WILL check the object can be grappled on before doing this
 		{
 			m_grapplePointSet = true;
+			m_ropeLength = Vector3.Distance(m_player.transform.position,transform.position);
 		}
 	}
 
@@ -42,8 +43,37 @@ public class GrappleLogic : MonoBehaviour
 		m_direction = newDirection;
 	}
 
-	public bool IsSet()
+	public bool isSet
 	{
-		return m_grapplePointSet;
+		get
+		{
+			return m_grapplePointSet;
+		}
+	}
+
+	public GameObject player
+	{
+		get
+		{
+			return m_player;
+		}
+
+		set
+		{
+			m_player = value;
+		}
+	}
+
+	public float ropeLength
+	{
+		get
+		{
+			return m_ropeLength;
+		}
+
+		set
+		{
+			m_ropeLength = value;
+		}
 	}
 }

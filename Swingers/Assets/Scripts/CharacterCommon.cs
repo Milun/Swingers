@@ -14,9 +14,13 @@ public class CharacterCommon : MonoBehaviour
 	public float	runAcc = 4.0f;				// How fast you gain speed while starting a run.
 	public float 	runSpeed = 9.0f;			// Maximum speed the character reaches while running.
 
-	private int 	m_facing = 1;				// Can equal 1 or -1. 1 = Facing right.
+	private float 	m_facing = 1;				// Can equal 1 or -1. 1 = Facing right.
 	private Vector3 m_aim = Vector3.zero;		// Where the character is aiming their grappling hook
 	private Vector3 m_grappleDirection;
+
+	private float	m_wallTimer = 0.0f;
+	private bool	m_onWall = false;
+	private const float	m_wallLimit = 10.0f;
 	
 	CharacterPhysics charPhysics;
 
@@ -29,7 +33,6 @@ public class CharacterCommon : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
 		// Allow the character to jump again after landing.
 		// The ySpeed check prevents this from triggering when the player jumps again.
 		if (charPhysics.isGrounded)
@@ -44,18 +47,58 @@ public class CharacterCommon : MonoBehaviour
 				// Be SURE to reset yspeed or they'll fastfall after going off again!
 				charPhysics.ySpeed = 0.0f;
 			}
+		}
 
+		if (!charPhysics.isGrounded && Mathf.Abs(charPhysics.wallNormal.x) >= 1.0f)
+		{
+			if (!m_onWall)
+			{
+				m_onWall = true;
+				m_wallTimer = 9.0f;
+			}
 
+			m_wallTimer += Time.deltaTime;
+
+			if (charPhysics.wallNormal.x > 0.0f)
+			{
+				m_facing = 1;
+			}
+			else
+			{
+				m_facing = -1;
+			}
+			// Negative is right, positive is left.
+			
+			/*	MILTON
+			 * 	SLIDING ANIMATION GOES HERE 
+			 */
+			charPhysics.isGrounded = false;
+
+			if (charPhysics.ySpeed < 0)
+			{
+				if (m_wallLimit / m_wallTimer >= 1)
+				{
+					charPhysics.ySpeed *= (m_wallLimit / m_wallTimer);
+				}
+				if (charPhysics.ySpeed > 0)
+				{
+					charPhysics.ySpeed = 0;
+				}
+			}
+		}
+		else
+		{
+			m_onWall = false;
 		}
 
 		if(currentGrapplePoint != null)
 		{
-			if(currentGrapplePoint.GetComponent<GrappleLogic>().IsSet())
+			if(currentGrapplePoint.GetComponent<GrappleLogic>().isSet)
 			{
-				//He can talk? He can talk? He can talk? I CAN SWING!
-				
-				//Milton: Ryan, this was brutally raping the poor Knight when it activated. I'm dissabling it for now.
-				transform.position = Vector3.Lerp(transform.position, currentGrapplePoint.transform.position + new Vector3(6,-1,0), Time.deltaTime * 5.0f);
+				//SWING ATTEMPT ONE
+				float distance = currentGrapplePoint.GetComponent<GrappleLogic>().ropeLength;
+				transform.position = (transform.position - currentGrapplePoint.transform.position).normalized * distance + currentGrapplePoint.transform.position;
+				//END SWING ATTEMPT ONE
 			}
 		}
 	}
@@ -68,6 +111,16 @@ public class CharacterCommon : MonoBehaviour
 		{
 			charPhysics.ySpeed = m_jumpHeight;
 			charPhysics.xSpeed = charPhysics.wallNormal.x*runSpeed*2.0f;
+
+			if (charPhysics.wallNormal.x > 0.0f)
+			{
+				m_facing = 1;
+			}
+			else
+			{
+				m_facing = -1;
+			}
+			// Negative is right, positive is left.
 
 			charPhysics.isGrounded = false;
 		}
@@ -110,13 +163,13 @@ public class CharacterCommon : MonoBehaviour
 		}
 
 		// Change direction variable.
-		if (charPhysics.isGrounded && Mathf.Abs(speed) > 0.0f)
+		if (charPhysics.isGrounded)
 		{
 			m_facing = (int)direction;
 		}
 	}
 
-	public int facing
+	public float facing
 	{
 		get
 		{
@@ -146,6 +199,17 @@ public class CharacterCommon : MonoBehaviour
 			{
 				grappleLogic.SetDirection(m_aim);
 			}
+
+			grappleLogic.player = gameObject;
+		}
+	}
+
+	public void ReleaseGrapple()
+	{
+		if(currentGrapplePoint != null)
+		{
+			Destroy(currentGrapplePoint.gameObject);
+			currentGrapplePoint = null;
 		}
 	}
 }
