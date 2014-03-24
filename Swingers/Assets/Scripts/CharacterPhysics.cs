@@ -28,7 +28,7 @@ public class CharacterPhysics : MonoBehaviour
 	public float	m_wallAnchor = 0.0f;		// Moves the character towards vertical walls, in a similar fashion to anchor.
 
 	public float 	m_xSpeed, m_ySpeed = 0.0f;
-	private float 	friction = 0.90f;
+	private float 	friction = 0.92f;
 
 	CharacterController controller;
 
@@ -133,12 +133,11 @@ public class CharacterPhysics : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		/*
 		m_xSpeed *= friction;
 		if(Mathf.Abs (m_xSpeed) <= 0.05)
 		{
 			m_xSpeed = 0.0f;
-		}*/
+		}
 
 		// Handle the collider for standing on the ground.
 		// If the controller.isGrounded is false, then isGrounded must be false too.

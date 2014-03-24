@@ -14,7 +14,7 @@ public class CharacterCommon : MonoBehaviour
 	public float	runAcc = 4.0f;				// How fast you gain speed while starting a run.
 	public float 	runSpeed = 9.0f;			// Maximum speed the character reaches while running.
 
-	private float 	m_facing = 1;				// Can equal 1 or -1. 1 = Facing right.
+	private int 	m_facing = 1;				// Can equal 1 or -1. 1 = Facing right.
 	private Vector3 m_aim = Vector3.zero;		// Where the character is aiming their grappling hook
 	private Vector3 m_grappleDirection;
 	
@@ -110,13 +110,13 @@ public class CharacterCommon : MonoBehaviour
 		}
 
 		// Change direction variable.
-		if (charPhysics.isGrounded)
+		if (charPhysics.isGrounded && Mathf.Abs(speed) > 0.0f)
 		{
 			m_facing = (int)direction;
 		}
 	}
 
-	public float facing
+	public int facing
 	{
 		get
 		{

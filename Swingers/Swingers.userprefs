@@ -1,14 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterPhysics.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Input_Keyboard.cs">
     <Files>
-      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="108" Column="4" />
-      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="204" Column="5" />
-      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="70" Column="61" />
+      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="93" Column="11" />
+      <File FileName="Assets\Scripts\CharacterCommon.cs" Line="106" Column="20" />
+      <File FileName="Assets\Scripts\CharacterPhysics.cs" Line="140" Column="4" />
       <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="93" Column="11" />
       <File FileName="Assets\Scripts\GrappleLogic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Input_Keyboard.cs" Line="36" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

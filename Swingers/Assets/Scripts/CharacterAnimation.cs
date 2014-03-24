@@ -8,6 +8,11 @@ public class CharacterAnimation : MonoBehaviour
 	CharacterCommon 	charCommon;
 	CharacterPhysics 	charPhysics;
 
+	private int facingLast = 0;		// The direction the character was facing in the last frame.
+	private int facingCurr = 0;		// The current direction the character is facing.
+	private int facingDest = 0;		// The destination the character needs to turn to face.
+	private const int facingSpeed = 15;	// The speed the character turns in that direction.
+
 	// Use this for initialization
 	void Awake ()
 	{
@@ -60,20 +65,33 @@ public class CharacterAnimation : MonoBehaviour
 			// Smoothly transitions towards this animation (takes half a second).
 			animation.CrossFade("anim_run", 0.6f);
 		}
+	}
 
-		if (charCommon.facing == -1)
+	private void Turn()
+	{
+		if (charCommon.facing != facingLast)
 		{
-			transform.localEulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
+			facingLast = charCommon.facing;
+			facingDest = 180 - 90*facingLast;
 		}
-		else
+
+		if (facingCurr != facingDest)
 		{
-			transform.localEulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+			if (facingCurr >= 360)
+			{
+				facingCurr -= 360;
+			}
+
+			facingCurr += facingSpeed;
+			transform.localEulerAngles = new Vector3(0.0f, (float)facingCurr, 0.0f);
 		}
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
+		Turn ();
+
 		if (charPhysics.isGrounded)
 		{
 			AnimWalk();
